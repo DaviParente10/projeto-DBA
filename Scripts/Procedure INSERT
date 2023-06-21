@@ -1,0 +1,201 @@
+#Procedures de INSERT
+
+#tb_ator
+DELIMITER $$
+CREATE PROCEDURE sp_insert_ator(Iid_Ator int(11), Inome varchar(45), Isobrenome varchar(45))
+	BEGIN
+		INSERT INTO tb_ator
+			(id_Ator, nome, sobrenome)
+		VALUES
+			(Iid_Ator, Inome, Isobrenome);
+	END $$
+DELIMITER ;
+
+#tb_cartao_credito
+DELIMITER $$
+CREATE PROCEDURE sp_insert_cartao_credito(Iid_Cartao INT(11), Inumero VARCHAR(20), Idata_vencimento DATE, ICVV CHAR(3), Ititular VARCHAR(255))
+	BEGIN
+		INSERT INTO tb_cartao_credito
+			(id_Cartao, numero, data_vencimento, CVV, titular)
+		VALUES
+			(Iid_Cartao, Inumero, Idata_vencimento, ICVV, Ititular);
+	END $$
+DELIMITER ;
+
+#tb_catalogo
+DELIMITER $$
+CREATE PROCEDURE sp_insert_catalogo(Iid_Catalogo varchar(45), Iimagem_capa VARCHAR(255), Ititulo varchar(45), Isinopse varchar(255), Iano_lancamento date, Iid_Pais int(11), Iid_Classificacao int(11),Iid_Idioma int(11))
+	BEGIN
+		INSERT INTO tb_catalogo
+			(id_Catalogo, imagem_capa, titulo, sinopse, ano_lancamento, id_Pais, id_Classificacao, id_Idioma)
+		VALUES
+			(Iid_Catalogo, Iimagem_capa, Ititulo, Isinopse, Iano_lancamento, Iid_Pais, Iid_Classificacao, Iid_Idioma);
+	END $$
+DELIMITER ;
+
+#tb_categoria
+DELIMITER $$
+CREATE PROCEDURE sp_insert_categoria(Iid_categoria INT(11), Inome_categoria VARCHAR(45))
+	BEGIN
+		INSERT INTO tb_categoria
+			(id_categoria, nome_categoria)
+		VALUES
+			(Iid_categoria, Inome_categoria);
+	END $$
+DELIMITER ;
+
+#tb_classificacao_indicativa
+DELIMITER $$
+CREATE PROCEDURE sp_insert_classificao_indicativa(Iid_Classificacao INT(11), Iidade enum('L','10','12','16','18'), Idescricao VARCHAR(255))
+	BEGIN
+		INSERT INTO tb_classificacao_indicativa
+			(id_Classificacao, idade, descricao)
+		VALUES
+			(Iid_Classificacao, Iidade, Idescricao);
+	END $$
+DELIMITER ;
+
+#tb_cliente
+DELIMITER $$
+CREATE PROCEDURE sp_insert_cliente(Iid_Cliente INT(11), Inome_cliente VARCHAR(255), Iid_usuario int(11), Iid_Cartao int(11))
+	BEGIN
+		INSERT INTO tb_cliente
+			(id_Cliente, nome_cliente, id_usuario, id_Cartao)
+		VALUES
+			(Iid_Cliente, Inome_cliente, Iid_usuario, Iid_Cartao);
+	END $$
+DELIMITER ;
+
+#tb_episodio
+DELIMITER $$
+CREATE PROCEDURE sp_insert_episodio(Iid_episodio INT(11), Inumero VARCHAR(255), Iid_temporada int(11), Iid_Catalogo varchar(45))
+	BEGIN
+		INSERT INTO tb_episodio
+			(id_episodio,numero, id_temporada, id_Catalogo)
+		VALUES
+			(Iid_episodio, Inumero, Iid_temporada, Iid_Catalogo);
+	END $$
+DELIMITER ;
+
+#tb_filme
+DELIMITER $$
+CREATE PROCEDURE sp_insert_filme(Iid_Filme INT(11), Ioscar tinyint(4), Iid_Catalogo varchar(45))
+	BEGIN
+		INSERT INTO tb_filme
+			(id_Filme, oscar, id_Catalogo)
+		VALUES
+			(Iid_episodio, Inumero, Iid_temporada, Iid_Catalogo);
+	END $$
+DELIMITER ;
+
+#tb_funcionario
+DELIMITER $$
+CREATE PROCEDURE sp_insert_funcionario(Iid_Funcionario INT(11), Iimagem VARCHAR(255), Iid_usuario int(11))
+	BEGIN
+		INSERT INTO tb_funcionario
+			(id_Funcionario, imagem , id_usuario)
+		VALUES
+			(Iid_Funcionario, Iimagem, Iid_usuario);
+	END $$
+DELIMITER ;
+
+#tb_idioma
+DELIMITER $$
+CREATE PROCEDURE sp_insert_idioma(Iid_Idioma INT(11), Inome VARCHAR(50))
+	BEGIN
+		INSERT INTO tb_idioma
+			(id_Idioma, nome)
+		VALUES
+			(Iid_Idioma, Inome);
+	END $$
+DELIMITER ;
+
+#tb_pagamento
+DELIMITER $$
+CREATE PROCEDURE sp_insert_pagamento(Iid_Pagamento INT(11), Ivalor VARCHAR(255), Idata_pagamento TIMESTAMP, Iid_Cartao int(11), Iid_TipoPagamento int(11), Iid_Cliente int(11))
+	BEGIN
+		INSERT INTO tb_pagamento
+			(id_Pagamento, valor, data_pagamento, id_Cartao , id_TipoPagamento, id_Cliente)
+		VALUES
+			(Iid_Pagamento, Ivalor, Idata_pagamento, Iid_Cartao, Iid_TipoPagamento, Iid_Cliente);
+	END $$
+DELIMITER ;
+
+#tb_pais
+DELIMITER $$
+CREATE PROCEDURE sp_insert_pais(Iid_Pais INT(11), Inome VARCHAR(100), Icodigo CHAR(2))
+	BEGIN
+		INSERT INTO tb_pais
+			(id_Pais, nome,codigo)
+		VALUES
+			(Iid_Pais, Inome, Icodigo);
+	END $$
+DELIMITER ;
+
+
+#tb_perfil
+DELIMITER $$
+CREATE PROCEDURE sp_insert_perfil(Iid_Perfil INT(11), Ifoto VARCHAR(255), Inome VARCHAR(255), Itipo ENUM('I','G','C'), Iid_Clliente int(11), tb_plano_id_Plano INT(11))
+	BEGIN
+		INSERT INTO tb_perfil
+			(id_Perfil,foto, nome, tipo, id_Clliente, tb_plano_id_Plano)
+		VALUES
+			(Iid_Perfil, Ifoto, Inome, Itipo, Iid_Clliente, tb_plano_id_Plano);
+	END $$
+DELIMITER ;
+
+#tb_plano
+DELIMITER $$
+CREATE PROCEDURE sp_insert_plano(Iid_Perfil INT(11), Ifoto VARCHAR(255), Inome VARCHAR(255), Itipo ENUM('I','G','C'), Iid_Clliente int(11), tb_plano_id_Plano INT(11))
+	BEGIN
+		INSERT INTO tb_plano
+			(id_Plano, valor, descricao, dt_vencimento)
+		VALUES
+			(Iid_Plano, Ivalor, Idescricao, Idt_vencimento);
+	END $$
+DELIMITER ;
+
+#tb_serie
+DELIMITER $$
+CREATE PROCEDURE sp_insert_serie(Iid_serie INT(11), Iid_Catalogo VARCHAR(45))
+	BEGIN
+		INSERT INTO tb_serie
+			(id_serie,id_Catalogo)
+		VALUES
+			(Iid_serie, Iid_Catalogo);
+	END $$
+DELIMITER ;
+
+
+#tb_temporada
+DELIMITER $$
+CREATE PROCEDURE sp_insert_temporada(Iid_temporada INT(11), Ititulo VARCHAR(45), Idescricao VARCHAR(255), Iqtd_episodio int(11))
+	BEGIN
+		INSERT INTO tb_temporada
+			(id_temporada, titulo, descricao, qtd_episodio)
+		VALUES
+			(Iid_temporada, Ititulo, Idescricao, Iqtd_episodio);
+	END $$
+DELIMITER ;
+
+#tb_tipo_pagamento
+DELIMITER $$
+CREATE PROCEDURE sp_insert_tipo_pagamento(Iid_TipoPagamento INT(11), Inome VARCHAR(45))
+	BEGIN
+		INSERT INTO tb_tipo_pagamento
+			(id_TipoPagamento, nome)
+		VALUES
+			(Iid_TipoPagamento, Inome);
+	END $$
+DELIMITER ;
+
+#tb_usuario
+DELIMITER $$
+CREATE PROCEDURE sp_insert_usuario(Iid_usuario INT(11), Iprimeiro_nome VARCHAR(45), Isobrenome varchar(45), Iemail Varchar(45), Idata_nasc date, Idata_cadastro date, Isenha varchar(10), Iid_Pais int(11))
+	BEGIN
+		INSERT INTO tb_usuario
+			(id_usuario , primeiro_nome , sobrenome , email , data_nasc, data_cadastro, senha , id_Pais)
+		VALUES
+			(Iid_usuario , Iprimeiro_nome , Isobrenome , Iemail , Idata_nasc, Idata_cadastro, Isenha , Iid_Pais);
+	END $$
+DELIMITER ;
