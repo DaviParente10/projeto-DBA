@@ -1,3 +1,6 @@
+Aqui estão alguns dados para teste, aplicado em diferentes tabelas do Banco de Dados. Nesse caso, a inserção foi manual. Embora que, posteriormente, criei Procedures
+capazes de realizar as operações DML(Insert, Update e Delete)!
+
 INSERT INTO tb_idioma (nome) VALUES ('Inglês');
 INSERT INTO tb_idioma (nome) VALUES ('Espanhol');
 INSERT INTO tb_idioma (nome) VALUES ('Francês');
