@@ -1,24 +1,29 @@
-#Procedures de INSERT
+# Procedures de INSERT
 
-#tb_ator
+# tb_ator
 DELIMITER $$
 CREATE PROCEDURE sp_insert_ator(Iid_Ator int(11), Inome varchar(45), Isobrenome varchar(45))
 	BEGIN
+     DECLARE Iatualizacao DATETIME;
+     SET Iatualizacao = NOW();
 		INSERT INTO tb_ator
-			(id_Ator, fn_minusculo(nome), fn_minusculo(sobrenome))
+			(id_Ator, nome, sobrenome, atualizacao)
 		VALUES
-			(Iid_Ator, Inome, Isobrenome);
+			(Iid_Ator, fn_str_minusculo(Inome), fn_str_minusculo(Isobrenome), Iatualizacao);
 	END $$
 DELIMITER ;
+
 
 #tb_cartao_credito
 DELIMITER $$
 CREATE PROCEDURE sp_insert_cartao_credito(Iid_Cartao INT(11), Inumero VARCHAR(20), Idata_vencimento DATE, ICVV CHAR(3), Ititular VARCHAR(255))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_cartao_credito
-			(id_Cartao, numero, data_vencimento, CVV, titular)
+			(id_Cartao, numero, data_vencimento, CVV, titular,atualizacao)
 		VALUES
-			(Iid_Cartao, Inumero, Idata_vencimento, ICVV, Ititular);
+			(Iid_Cartao, Inumero, Idata_vencimento, ICVV, Ititular, Iatualizacao);
 	END $$
 DELIMITER ;
 
@@ -26,176 +31,208 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_insert_catalogo(Iid_Catalogo varchar(45), Iimagem_capa VARCHAR(255), Ititulo varchar(45), Isinopse varchar(255), Iano_lancamento date, Iid_Pais int(11), Iid_Classificacao int(11),Iid_Idioma int(11))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_catalogo
-			(id_Catalogo, imagem_capa, fn_minusculo(titulo), fn_minusculo(sinopse), ano_lancamento, id_Pais, id_Classificacao, id_Idioma)
+			(id_Catalogo, imagem_capa, titulo, sinopse, ano_lancamento, id_Pais, id_Classificacao, id_Idioma, atualizacao)
 		VALUES
-			(Iid_Catalogo, Iimagem_capa, Ititulo, Isinopse, Iano_lancamento, Iid_Pais, Iid_Classificacao, Iid_Idioma);
+			(Iid_Catalogo, fn_str_minusculo(Iimagem_capa), fn_str_minusculo(Ititulo), fn_str_minusculo(Isinopse), Iano_lancamento, Iid_Pais, Iid_Classificacao, Iid_Idioma, Iatualizacao);
 	END $$
 DELIMITER ;
 
-#tb_categoria
+# tb_categoria
 DELIMITER $$
 CREATE PROCEDURE sp_insert_categoria(Iid_categoria INT(11), Inome_categoria VARCHAR(45))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_categoria
-			(id_categoria, fn_minusculo(nome_categoria))
+			(id_categoria, nome_categoria, atualizacao)
 		VALUES
-			(Iid_categoria, Inome_categoria);
+			(Iid_categoria, fn_str_minusculo(Inome_categoria), Iatualizacao);
 	END $$
 DELIMITER ;
 
-#tb_classificacao_indicativa
+# tb_classificacao_indicativa
 DELIMITER $$
 CREATE PROCEDURE sp_insert_classificao_indicativa(Iid_Classificacao INT(11), Iidade enum('L','10','12','16','18'), Idescricao VARCHAR(255))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_classificacao_indicativa
-			(id_Classificacao, idade, fn_minusculo(descricao))
+			(id_Classificacao, idade, descricao, atualizacao)
 		VALUES
-			(Iid_Classificacao, Iidade, Idescricao);
+			(Iid_Classificacao, Iidade, fn_str_minusculo(Idescricao), atualizacao);
 	END $$
 DELIMITER ;
 
-#tb_cliente
+# tb_cliente
 DELIMITER $$
 CREATE PROCEDURE sp_insert_cliente(Iid_Cliente INT(11), Inome_cliente VARCHAR(255), Iid_usuario int(11), Iid_Cartao int(11))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_cliente
-			(id_Cliente, fn_minusculo(nome_cliente), id_usuario, id_Cartao)
+			(id_Cliente, nome_cliente, id_usuario, id_Cartao, atualizacao)
 		VALUES
-			(Iid_Cliente, Inome_cliente, Iid_usuario, Iid_Cartao);
+			(Iid_Cliente, fn_str_minusculo(Inome_cliente), Iid_usuario, Iid_Cartao, Iatualizacao);
 	END $$
 DELIMITER ;
 
-#tb_episodio
+# tb_episodio
 DELIMITER $$
 CREATE PROCEDURE sp_insert_episodio(Iid_episodio INT(11), Inumero VARCHAR(255), Iid_temporada int(11), Iid_Catalogo varchar(45))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_episodio
-			(id_episodio,numero, id_temporada, id_Catalogo)
+			(id_episodio,numero, id_temporada, id_Catalogo, atualizacao)
 		VALUES
-			(Iid_episodio, Inumero, Iid_temporada, Iid_Catalogo);
+			(Iid_episodio, Inumero, Iid_temporada, Iid_Catalogo, Iatualizacao);
 	END $$
 DELIMITER ;
 
-#tb_filme
+# tb_filme
 DELIMITER $$
 CREATE PROCEDURE sp_insert_filme(Iid_Filme INT(11), Ioscar tinyint(4), Iid_Catalogo varchar(45))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_filme
-			(id_Filme, oscar, id_Catalogo)
+			(id_Filme, oscar, id_Catalogo, atualizacao)
 		VALUES
-			(Iid_episodio, Inumero, Iid_temporada, Iid_Catalogo);
+			(Iid_episodio, Inumero, Iid_temporada, Iid_Catalogo, Iatualizacao);
 	END $$
 DELIMITER ;
 
-#tb_funcionario
+# tb_funcionario
 DELIMITER $$
 CREATE PROCEDURE sp_insert_funcionario(Iid_Funcionario INT(11), Iimagem VARCHAR(255), Iid_usuario int(11))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_funcionario
-			(id_Funcionario, fn_minusculo(imagem) , id_usuario)
+			(id_Funcionario, imagem , id_usuario, atualizacao)
 		VALUES
-			(Iid_Funcionario, Iimagem, Iid_usuario);
+			(Iid_Funcionario, fn_str_minusculo(Iimagem), Iid_usuario, Iatualizacao);
 	END $$
 DELIMITER ;
 
-#tb_idioma
+# tb_idioma
 DELIMITER $$
 CREATE PROCEDURE sp_insert_idioma(Iid_Idioma INT(11), Inome VARCHAR(50))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_idioma
-			(id_Idioma, fn_minusculo(nome))
+			(id_Idioma, nome, atualizacao)
 		VALUES
-			(Iid_Idioma, Inome);
+			(Iid_Idioma, fn_str_minusculo(Inome), Iatualizacao);
 	END $$
 DELIMITER ;
 
-#tb_pagamento
+# tb_pagamento
 DELIMITER $$
 CREATE PROCEDURE sp_insert_pagamento(Iid_Pagamento INT(11), Ivalor VARCHAR(255), Idata_pagamento TIMESTAMP, Iid_Cartao int(11), Iid_TipoPagamento int(11), Iid_Cliente int(11))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_pagamento
-			(id_Pagamento, valor, data_pagamento, id_Cartao , id_TipoPagamento, id_Cliente)
+			(id_Pagamento, valor, data_pagamento, id_Cartao , id_TipoPagamento, id_Cliente, atualizacao)
 		VALUES
-			(Iid_Pagamento, Ivalor, Idata_pagamento, Iid_Cartao, Iid_TipoPagamento, Iid_Cliente);
+			(Iid_Pagamento, Ivalor, Idata_pagamento, Iid_Cartao, Iid_TipoPagamento, Iid_Cliente, Iatualizacao);
 	END $$
 DELIMITER ;
 
-#tb_pais
+# tb_pais
 DELIMITER $$
 CREATE PROCEDURE sp_insert_pais(Iid_Pais INT(11), Inome VARCHAR(100), Icodigo CHAR(2))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_pais
-			(id_Pais, fn_minusculo(nome),codigo)
+			(id_Pais, nome,codigo, atualizacao)
 		VALUES
-			(Iid_Pais, Inome, Icodigo);
+			(Iid_Pais, fn_str_minusculo(Inome), Icodigo, Iatualizacao);
 	END $$
 DELIMITER ;
 
 
-#tb_perfil
+# tb_perfil
 DELIMITER $$
-CREATE PROCEDURE sp_insert_perfil(Iid_Perfil INT(11), Ifoto VARCHAR(255), Inome VARCHAR(255), Itipo ENUM('I','G','C'), Iid_Clliente int(11), tb_plano_id_Plano INT(11))
+CREATE PROCEDURE sp_insert_perfil(Iid_Perfil INT(11), Ifoto VARCHAR(255), Inome VARCHAR(255), Itipo ENUM('I','G','C'), Iid_Clliente int(11), Itb_plano_id_Plano INT(11))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_perfil
-			(id_Perfil,foto, fn_minusculo(nome), tipo, id_Clliente, tb_plano_id_Plano)
+			(id_Perfil,foto, nome, tipo, id_Clliente, tb_plano_id_Plano, atualizacao)
 		VALUES
-			(Iid_Perfil, Ifoto, Inome, Itipo, Iid_Clliente, tb_plano_id_Plano);
+			(Iid_Perfil, fn_str_minusculo(Ifoto), fn_str_minusculo(Inome), Itipo, Iid_Clliente, Itb_plano_id_Plano, Iatualizacao);
 	END $$
 DELIMITER ;
 
-#tb_plano
+# tb_plano
 DELIMITER $$
 CREATE PROCEDURE sp_insert_plano(Iid_Perfil INT(11), Ifoto VARCHAR(255), Inome VARCHAR(255), Itipo ENUM('I','G','C'), Iid_Clliente int(11), tb_plano_id_Plano INT(11))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_plano
-			(id_Plano, valor, fn_minusculo(descricao), dt_vencimento)
+			(id_Plano, valor, descricao, dt_vencimento, atualizacao)
 		VALUES
-			(Iid_Plano, Ivalor, Idescricao, Idt_vencimento);
+			(Iid_Plano, Ivalor, fn_str_minusculo(Idescricao), Idt_vencimento, Iatualizacao);
 	END $$
 DELIMITER ;
 
-#tb_serie
+# tb_serie
 DELIMITER $$
 CREATE PROCEDURE sp_insert_serie(Iid_serie INT(11), Iid_Catalogo VARCHAR(45))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_serie
-			(id_serie,id_Catalogo)
+			(id_serie,id_Catalogo, atualizacao)
 		VALUES
-			(Iid_serie, Iid_Catalogo);
+			(Iid_serie, Iid_Catalogo, Iatualizacao);
 	END $$
 DELIMITER ;
 
 
-#tb_temporada
+# tb_temporada
 DELIMITER $$
 CREATE PROCEDURE sp_insert_temporada(Iid_temporada INT(11), Ititulo VARCHAR(45), Idescricao VARCHAR(255), Iqtd_episodio int(11))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_temporada
-			(id_temporada, fn_minusculo(titulo), fn_minusculo(descricao), qtd_episodio)
+			(id_temporada, titulo, descricao, qtd_episodio, atualizacao)
 		VALUES
-			(Iid_temporada, Ititulo, Idescricao, Iqtd_episodio);
+			(Iid_temporada, fn_str_minusculo(Ititulo), fn_str_minusculo(Idescricao), Iqtd_episodio, Iatualizacao);
 	END $$
 DELIMITER ;
 
-#tb_tipo_pagamento
+# tb_tipo_pagamento
 DELIMITER $$
 CREATE PROCEDURE sp_insert_tipo_pagamento(Iid_TipoPagamento INT(11), Inome VARCHAR(45))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_tipo_pagamento
-			(id_TipoPagamento, fn_minusculo(nome))
+			(id_TipoPagamento, nome, atualizacao)
 		VALUES
-			(Iid_TipoPagamento, Inome);
+			(Iid_TipoPagamento, fn_str_minusculo(Inome), Iatualizacao);
 	END $$
 DELIMITER ;
 
-#tb_usuario
+# tb_usuario
 DELIMITER $$
 CREATE PROCEDURE sp_insert_usuario(Iid_usuario INT(11), Iprimeiro_nome VARCHAR(45), Isobrenome varchar(45), Iemail Varchar(45), Idata_nasc date, Idata_cadastro date, Isenha varchar(10), Iid_Pais int(11))
 	BEGIN
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
 		INSERT INTO tb_usuario
-			(id_usuario , fn_minusculo(primeiro_nome) , fn_minusculo(sobrenome) , fn_minusculo(email) , data_nasc, data_cadastro, fn_minusculo(senha) , id_Pais)
+			(id_usuario , primeiro_nome , sobrenome , email , data_nasc, data_cadastro, senha , id_Pais, atualizacao)
 		VALUES
-			(Iid_usuario , Iprimeiro_nome , Isobrenome , Iemail , Idata_nasc, Idata_cadastro, Isenha , Iid_Pais);
+			(Iid_usuario , fn_str_minusculo(Iprimeiro_nome) , fn_str_minusculo(Isobrenome) , fn_str_minusculo(Iemail) , Idata_nasc, Idata_cadastro, Isenha , Iid_Pais, Iatualizacao);
 	END $$
 DELIMITER ;
