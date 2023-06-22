@@ -1,18 +1,23 @@
-#PROCEDURES DE UPDATE
+#2 Procedures de UPDATE
 
-#tb_ator
+# tb_ator
 DELIMITER $$
 CREATE PROCEDURE sp_update_ator (Iid_ator INT(11), Inome VARCHAR(45), Isobrenome VARCHAR(45))
 	BEGIN
-		UPDATE tb_artista SET id_Ator = Iid_Ator, nome = Inome, sobrenome = Isobrenome;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_artista SET id_Ator = Iid_Ator, nome = Inome, sobrenome = Isobrenome, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
 #tb_cartao_credito
+
 DELIMITER $$
 CREATE PROCEDURE sp_update_cartao_credito (Iid_Cartao INT(11), Inumero VARCHAR(20), Idata_vencimento DATE, ICVV CHAR(3), Ititular VARCHAR(255))
 	BEGIN
-		UPDATE tb_cartao_credito SET id_Cartao = Iid_Cartao, numero = Inumero, data_vencimento = Idata_vencimento, CVV = ICVV, titular = Ititular;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_cartao_credito SET id_Cartao = Iid_Cartao, numero = Inumero, data_vencimento = Idata_vencimento, CVV = ICVV, titular = Ititular, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -20,7 +25,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_catalogo (Iid_Catalogo VARCHAR(45), Iimagem_capa VARCHAR(255), Ititulo VARCHAR(45), Isinopse VARCHAR(255), Iano_lancamento DATE, Iid_Pais int(11), Iid_Classificacao int(11), Iid_Idioma int(11))
 	BEGIN
-		UPDATE tb_catalogo SET id_Catalogo = Iid_Catalogo, imagem_capa = Iimagem_capa, titulo = Ititulo, sinopse = Isinopse, ano_lancamento = Iano_lancamento, id_Pais = Iid_Pais, id_Classificacao = Iid_Classificacao, id_Idioma = Iid_Idioma;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_catalogo SET id_Catalogo = Iid_Catalogo, imagem_capa = Iimagem_capa, titulo = Ititulo, sinopse = Isinopse, ano_lancamento = Iano_lancamento, id_Pais = Iid_Pais, id_Classificacao = Iid_Classificacao, id_Idioma = Iid_Idioma, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -28,7 +35,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_categoria (Iid_categoria INT(11), Inome_categoria VARCHAR(45))
 	BEGIN
-		UPDATE tb_categoria SET id_categoria = Iid_categoria, nome_categoria = Inome_categoria;
+		DECLARE Iatualizacao DATETIME;
+        SET Iatualizacao = NOW();
+		UPDATE tb_categoria SET id_categoria = Iid_categoria, nome_categoria = Inome_categoria, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -36,7 +45,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_classificacao_indicativa (Iid_Classificacao INT(11), Iidade enum('L','10','12','16','18'), descricao VARCHAR(255))
 	BEGIN
-		UPDATE tb_classificacao_indicativa SET id_Classificacao = Iid_Classificacao, idade = Iidade, descricao = Idescricao;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_classificacao_indicativa SET id_Classificacao = Iid_Classificacao, idade = Iidade, descricao = Idescricao, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -44,7 +55,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_cliente (Iid_Cliente INT(11), Inome_cliente VARCHAR(255), Iid_usuario int(11), Iid_Cartao int(11))
 	BEGIN
-		UPDATE tb_cliente SET id_Cliente = Iid_Cliente, nome_cliente = Inome_cliente, id_usuario = Iid_usuario;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_cliente SET id_Cliente = Iid_Cliente, nome_cliente = Inome_cliente, id_usuario = Iid_usuario, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -52,7 +65,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_episodio (Iid_episodio INT(11), Inumero VARCHAR(255), Iid_temporada int(11), Iid_Catalogo varchar(45))
 	BEGIN
-		UPDATE tb_episodio SET id_episodio = Iid_episodio, numero = Inumero, id_temporada = Iid_temporada, id_Catalogo = Iid_Catalogo;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_episodio SET id_episodio = Iid_episodio, numero = Inumero, id_temporada = Iid_temporada, id_Catalogo = Iid_Catalogo, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -60,7 +75,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_filme (Iid_Filme INT(11), Ioscar tinyint(4), Iid_Catalogo varchar(45))
 	BEGIN
-		UPDATE tb_filme SET id_Filme = Iid_Filme, oscar = Ioscar, id_Catalogo = Iid_Catalogo;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_filme SET id_Filme = Iid_Filme, oscar = Ioscar, id_Catalogo = Iid_Catalogo, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -68,7 +85,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_funcionario (Iid_Funcionario INT(11), Iimagem VARCHAR(255), Iid_usuario int(11))
 	BEGIN
-		UPDATE tb_funcionario SET id_Funcionario = Iid_Funcionario, imagem = Iimagem, id_usuario = Iid_usuario;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_funcionario SET id_Funcionario = Iid_Funcionario, imagem = Iimagem, id_usuario = Iid_usuario, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -76,7 +95,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_cliente (Iid_Cliente INT(11), Inome_cliente VARCHAR(255), Iid_usuario int(11), Iid_Cartao int(11))
 	BEGIN
-		UPDATE tb_cliente SET id_Cliente = Iid_Cliente, nome_cliente = Inome_cliente, id_usuario = Iid_usuario;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_cliente SET id_Cliente = Iid_Cliente, nome_cliente = Inome_cliente, id_usuario = Iid_usuario, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -84,7 +105,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_pagamento (Iid_Pagamento INT(11), Ivalor VARCHAR(255), Idata_pagamento TIMESTAMP, Iid_Cartao int(11), Iid_TipoPagamento int(11), Iid_Cliente int(11))
 	BEGIN
-		UPDATE tb_cliente SET valor = Ivalor, data_pagamento = Idatapagamento, id_Cartao = Iid_Cartao, id_TipoPagamento = Iid_TipoPagamento, id_Clliente = Iid_Cliente;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_cliente SET valor = Ivalor, data_pagamento = Idatapagamento, id_Cartao = Iid_Cartao, id_TipoPagamento = Iid_TipoPagamento, id_Clliente = Iid_Cliente, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -92,7 +115,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_pais (Iid_Pais INT(11), Inome VARCHAR(100), Icodigo CHAR(2))
 	BEGIN
-		UPDATE tb_pais SET id_Pais = Iid_Pais, nome = Inome, codigo = Icodigo;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_pais SET id_Pais = Iid_Pais, nome = Inome, codigo = Icodigo, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -100,7 +125,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_perfil (Iid_Perfil INT(11), Ifoto VARCHAR(255), Inome VARCHAR(255), Itipo ENUM('I','G','C'), Iid_Clliente int(11), tb_plano_id_Plano INT(11))
 	BEGIN
-		UPDATE tb_perfil SET id_Perfil = Iid_Perfil, foto = Ifoto , nome = Inome, tipo = Itipo, id_Clliente = Iid_Clliente, tb_plano_id_Plano = Itb_plano_id_Plano;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_perfil SET id_Perfil = Iid_Perfil, foto = Ifoto , nome = Inome, tipo = Itipo, id_Clliente = Iid_Clliente, tb_plano_id_Plano = Itb_plano_id_Plano, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -108,7 +135,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_plano (Iid_Plano INT(11), Ivalor FLOAT(2,2), Idescricao varchar(255), Idt_vencimento date)
 	BEGIN
-		UPDATE tb_plano SET id_Plano = Iid_Plano, valor = Ivalor, descricao = Idescricao, dt_vencimento = Idt_vencimento;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_plano SET id_Plano = Iid_Plano, valor = Ivalor, descricao = Idescricao, dt_vencimento = Idt_vencimento, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -116,7 +145,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_serie (Iid_serie INT(11), Iid_Catalogo VARCHAR(45))
 	BEGIN
-		UPDATE tb_serie SET id_serie = Iid_serie, id_Catalogo = Iid_Catalogo;
+    DECLARE Iatualizacao DATETIME;
+	SET Iatualizacao = NOW();
+		UPDATE tb_serie SET id_serie = Iid_serie, id_Catalogo = Iid_Catalogo, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -124,7 +155,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_temporada (Iid_temporada INT(11), Ititulo VARCHAR(45), Idescricao VARCHAR(255), Iqtd_episodio int(11))
 	BEGIN
-		UPDATE tb_temporada SET id_temporada = Iid_temporada, titulo = Ititulo, descricao = Idescricao, qtd_episodio = Iqtd_episodio;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_temporada SET id_temporada = Iid_temporada, titulo = Ititulo, descricao = Idescricao, qtd_episodio = Iqtd_episodio, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -132,7 +165,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_tipo_pagamento (Iid_TipoPagamento INT(11), Inome VARCHAR(45))
 	BEGIN
-		UPDATE tb_tipo_pagamento SET id_TipoPagamento = Iid_TipoPagamento, nome = Inome;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_tipo_pagamento SET id_TipoPagamento = Iid_TipoPagamento, nome = Inome, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
 
@@ -140,6 +175,8 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_update_usuario (Iid_usuario INT(11), Iprimeiro_nome VARCHAR(45), Isobrenome varchar(45), Iemail Varchar(45), Idata_nasc date, Idata_cadastro date, Isenha varchar(10), Iid_Pais int(11))
 	BEGIN
-		UPDATE tb_usuario SET id_usuario = Iid_usuario, primeiro_nome = Iprimeiro_nome, sobrenome = Isobrenome, email = Iemail, data_nasc = Idata_nasc, data_cadastro = Idata_cadastro, senha = Isenha, id_Pais = Iid_Pais;
+		DECLARE Iatualizacao DATETIME;
+		SET Iatualizacao = NOW();
+		UPDATE tb_usuario SET id_usuario = Iid_usuario, primeiro_nome = Iprimeiro_nome, sobrenome = Isobrenome, email = Iemail, data_nasc = Idata_nasc, data_cadastro = Idata_cadastro, senha = Isenha, id_Pais = Iid_Pais, atualizacao = Iatualizacao;
 	END $$
 DELIMITER ;
